@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "dash-tauri-plot",
+  "version": "0.1.0",
+  "identifier": "com.dash-tauri-plot.app",
+  "build": {
+    "beforeDevCommand": ".\\src-tauri\\app.exe",
+    "beforeBuildCommand": ""
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["msi"],
+    "icon": ["icons/icon.ico"],
+    "resources": ["app.exe"]
+  }
+}

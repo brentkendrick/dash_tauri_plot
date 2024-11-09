@@ -1,0 +1,25 @@
+use std::process::{Command, Stdio};
+
+fn main() {
+    tauri::Builder::default()
+        .setup(|app| {
+            let result = Command::new("cmd")
+                .arg("/C")
+                .arg("echo Hello from Tauri!")
+                .stdout(Stdio::inherit()) // Redirect stdout to the terminal
+                .stderr(Stdio::inherit()) // Redirect stderr to the terminal
+                .spawn();
+
+            match result {
+                Ok(_) => println!("Successfully executed the command"),
+                Err(e) => {
+                    println!("Failed to execute the command: {:?}", e);
+                    println!("Error kind: {:?}", e.kind()); // More info on the error
+                }
+            }
+
+            Ok(())
+        })
+        .run(tauri::generate_context!())
+        .expect("Error while running Tauri application");
+}
