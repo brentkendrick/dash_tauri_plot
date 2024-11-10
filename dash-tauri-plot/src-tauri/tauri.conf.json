@@ -3,10 +3,6 @@
   "productName": "dash-tauri-plot",
   "version": "0.1.0",
   "identifier": "com.dash-tauri-plot.app",
-  "build": {
-      "beforeDevCommand": ".\\src-tauri\\app.exe",
-      "beforeBuildCommand": ""
-  },
   "app": {
       "windows": [
           {

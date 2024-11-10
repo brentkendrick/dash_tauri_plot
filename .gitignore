@@ -10,6 +10,11 @@ __pycache__/
 *.raw
 *.mzML
 
+# Executables / builds
+*.exe
+*.toc
+app.exe
+
 # Dash Serverside output filestore
 **/file_system_store
 
