@@ -4,12 +4,22 @@
   "version": "0.1.0",
   "identifier": "com.dash-tauri-plot.app",
   "build": {
-    "beforeDevCommand": ".\\src-tauri\\app.exe",
-    "beforeBuildCommand": ""
+      "beforeDevCommand": ".\\src-tauri\\app.exe",
+      "beforeBuildCommand": ""
+  },
+  "app": {
+      "windows": [
+          {
+              "label": "main",
+              "url": "http://localhost:8050",
+              "fullscreen": false,
+              "title": "My Dash App"
+          }
+      ]
   },
   "bundle": {
     "active": true,
-    "targets": ["msi"],
+    "targets": ["msi"], 
     "icon": ["icons/icon.ico"],
     "resources": ["app.exe"]
   }
