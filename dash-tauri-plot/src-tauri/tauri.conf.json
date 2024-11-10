@@ -17,6 +17,6 @@
     "active": true,
     "targets": ["msi"], 
     "icon": ["icons/icon.ico"],
-    "resources": ["app.exe"]
+    "resources": ["app.exe", "launch_app_hidden.ps1"]
   }
 }
