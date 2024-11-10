@@ -5,7 +5,7 @@ use tauri::{generate_context, Builder, Manager};
 use winapi::um::processthreadsapi::CreateProcessA;
 use winapi::um::processthreadsapi::PROCESS_INFORMATION;
 use winapi::um::processthreadsapi::STARTUPINFOA;
-use winapi::um::winbase::DETACHED_PROCESS;
+use winapi::um::winbase::CREATE_NO_WINDOW;
 
 fn main() {
     Builder::default()
@@ -30,10 +30,10 @@ fn main() {
                 CreateProcessA(
                     exe_path_cstring.as_ptr(),
                     ptr::null_mut(),
-                    ptr::null_mut(),A
+                    ptr::null_mut(),
                     ptr::null_mut(),
                     0,
-                    DETACHED_PROCESS,
+                    CREATE_NO_WINDOW,
                     ptr::null_mut(),
                     ptr::null_mut(),
                     &mut startup_info,
