@@ -1,7 +1,8 @@
-use std::os::windows::process::CommandExt;
-use std::process::{Command, Stdio};
+use std::ffi::CString;
+use std::ptr;
 use tauri::{generate_context, Builder, Manager};
-use winapi::um::winbase::CREATE_NO_WINDOW;
+use winapi::um::shellapi::ShellExecuteA;
+use winapi::um::winuser::SW_HIDE;
 
 fn main() {
     Builder::default()
@@ -13,16 +14,21 @@ fn main() {
                 .expect("Failed to locate resource directory")
                 .join("app.exe");
 
-            Command::new("powershell")
-                .args(&[
-                    "-WindowStyle",
-                    "Hidden",
-                    "-Command",
-                    &format!("Start-Process -FilePath '{}'", exe_path.display()),
-                ])
-                .creation_flags(CREATE_NO_WINDOW)
-                .spawn()
-                .expect("Failed to start app.exe via PowerShell");
+            let path = CString::new(exe_path.to_str().expect("Failed to convert path"))
+                .expect("CString conversion failed");
+            let operation = CString::new("open").expect("CString conversion failed");
+
+            // Use ShellExecute to launch `app.exe` with the console hidden
+            unsafe {
+                ShellExecuteA(
+                    ptr::null_mut(),
+                    operation.as_ptr(),
+                    path.as_ptr(),
+                    ptr::null(),
+                    ptr::null(),
+                    SW_HIDE,
+                );
+            }
 
             Ok(())
         })
